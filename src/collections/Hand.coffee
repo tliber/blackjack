@@ -20,6 +20,8 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     #fred's awesome array
     # [@minScore(), @minScore() + 10 * @hasAce()]
+    if @minScore() > 21
+      return 'Bust!'
     unless @hasAce()
       return @minScore()
     score = @minScore()
@@ -27,6 +29,9 @@ class window.Hand extends Backbone.Collection
     for count in aces
       if score + 10 <= 21
         score = score + 10
+    #if two cards and score is 21, trigger blackjack
+    if @.length is 2 and score is 21
+      score = 'Blackjack!'
     score
 
 
