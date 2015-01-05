@@ -14,6 +14,16 @@ class window.Hand extends Backbone.Collection
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0
 
+  stand: ->
+    #if is dealer
+      #reveal card
+
+      #get score of hand
+      #if score < 17
+        #hit
+      #else
+        #return scores()
+        #trigger compare hands
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
@@ -21,7 +31,9 @@ class window.Hand extends Backbone.Collection
     #fred's awesome array
     # [@minScore(), @minScore() + 10 * @hasAce()]
     if @minScore() > 21
+      #trigger player loss
       return 'Bust!'
+
     unless @hasAce()
       return @minScore()
     score = @minScore()
