@@ -18,6 +18,15 @@ class window.Hand extends Backbone.Collection
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
-    [@minScore(), @minScore() + 10 * @hasAce()]
+    #fred's awesome array
+    # [@minScore(), @minScore() + 10 * @hasAce()]
+    unless @hasAce()
+      return @minScore()
+    score = @minScore()
+    aces = [1..@hasAce()]
+    for count in aces
+      if score + 10 <= 21
+        score = score + 10
+    score
 
 
