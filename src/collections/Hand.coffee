@@ -2,6 +2,14 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    @on 'reveal', @reveal, @
+
+  stand: ->
+
+    @trigger 'reveal', @
+
+    #TODO: needs logic
+    console.log("in stand")
 
   score: 0,
 
@@ -32,12 +40,14 @@ class window.Hand extends Backbone.Collection
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
+
     #fred's awesome array
     # [@minScore(), @minScore() + 10 * @hasAce()]
     if @minScore() > 21
       #TO DO: trigger @loss
       @trigger 'busted'
       return 'Bust!'
+
 
     unless @hasAce()
       return @minScore()
