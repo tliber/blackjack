@@ -15,15 +15,11 @@ class window.Hand extends Backbone.Collection
   , 0
 
   stand: ->
-    #if is dealer
-      #reveal card
-
-      #get score of hand
-      #if score < 17
-        #hit
-      #else
-        #return scores()
-        #trigger compare hands
+    if @isDealer
+      @at(0).flip()
+      while @scores() < 17
+        @hit()
+    #trigger compare hands
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
