@@ -5,4 +5,23 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
+  #listen to win/loss events
+    @on 'busted' =>
+      console.log @
+
+      #if player == buster
+
+      #dealer win
+    #if dealer == buster
+      #player win
+    #else
+      #dealer <=> player
+        #win/psuh
+
+
+  #case player win
+  #case dealer win
+  #case tie
+
+
 

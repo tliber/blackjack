@@ -3,6 +3,8 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
+  score: 0,
+
   hit: ->
     @add(@deck.pop())
 
@@ -19,7 +21,13 @@ class window.Hand extends Backbone.Collection
       @at(0).flip()
       while @scores() < 17
         @hit()
+    @score = @scores()
+    # @trigger 'showdown'
     #trigger compare hands
+
+  # busted: ->
+  # scores() == 'Bust!'
+
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
@@ -27,7 +35,8 @@ class window.Hand extends Backbone.Collection
     #fred's awesome array
     # [@minScore(), @minScore() + 10 * @hasAce()]
     if @minScore() > 21
-      #trigger player loss
+      #TO DO: trigger @loss
+      @trigger 'busted'
       return 'Bust!'
 
     unless @hasAce()
@@ -41,5 +50,3 @@ class window.Hand extends Backbone.Collection
     if @.length is 2 and score is 21
       score = 'Blackjack!'
     score
-
-
